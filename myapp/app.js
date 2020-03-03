@@ -1,12 +1,16 @@
 const express = require('express'),
       app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get('/users/:name?', (req, res) => {
+  if (req.params.name) {
+    res.send('Hello, ' + req.params.name);
+  } else {
+    res.send('Hello, nobody.');
+  }
 });
 
-app.get('/about', (req, res) => {
-  res.send('About this page.');
+app.get('/items/:id([0-9]+)', (req, res) => {
+  res.send('Item no: ' + req.params.id);
 });
 
 app.listen(3000);
