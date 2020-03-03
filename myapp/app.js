@@ -1,16 +1,9 @@
 const express = require('express'),
       app = express();
+app.use(express.static(__dirname + '/public'));
 
-app.get('/users/:name?', (req, res) => {
-  if (req.params.name) {
-    res.send('Hello, ' + req.params.name);
-  } else {
-    res.send('Hello, nobody.');
-  }
-});
-
-app.get('/items/:id([0-9]+)', (req, res) => {
-  res.send('Item no: ' + req.params.id);
+app.get('/hello.txt', (req, res) => {
+  res.sendfile(__dirname + '/public/hello.txt');
 });
 
 app.listen(3000);
