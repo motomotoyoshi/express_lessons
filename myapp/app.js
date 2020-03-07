@@ -1,21 +1,24 @@
 const express = require('express'),
       logger = require('morgan'),
+      bodyParser = require('body-parser'),
       app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+// middleware
+// app.use(bodyParser.json);
+app.use(bodyParser.urlencoded());
+
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/public'));
 
-app.param('id', (req, res, next, id) => {
-  const users = ['aa', 'bb', 'cc'];
-  req.params.name = users[id];
-  next();
-})
+app.get('/new', (req, res) => {
+  res.render('new');
+});
 
-app.get('/hello/:id', (req, res) => {
-  res.send('hello ' + req.params.name);
+app.post('/create', (req, res) => {
+  res.send(req.body.name);
 });
 
 app.listen(3000);
