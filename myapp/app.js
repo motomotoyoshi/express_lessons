@@ -7,7 +7,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // middleware
-// app.use(bodyParser.json);
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.use(logger('dev'));
