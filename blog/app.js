@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded());
 app.use(methodOverride('_method'))
 
 app.use(logger('dev'));
+app.use((err, req, res, next) => res.send(err.message));
 
 // routing
 app.get('/', post.index);

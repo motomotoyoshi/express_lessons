@@ -20,17 +20,25 @@ exports.edit = (req, res) => {
   );
 };
 
-exports.update = (req, res) => {
-  posts[req.body.id] = {
-    title: req.body.title,
-    body: req.body.body
-  };
-  res.redirect('/');
+exports.update = (req, res, next) => {
+  if(req.body.id !== req.params.id) {
+    next(new Error('ID not valid'));
+  } else {
+    posts[req.body.id] = {
+      title: req.body.title,
+      body: req.body.body
+    };
+    res.redirect('/');
+  }
 };
 
-exports.destroy = (req, res) => {
-  posts.splice(req.body.id, 1);
-  res.redirect('/');
+exports.destroy = (req, res, next) => {
+  if (req.body.id !== req.params.id) {
+    next(new Error('ID not valid'));
+  } else {
+    posts.splice(req.body.id, 1);
+    res.redirect('/');
+  }
 };
 
 exports.create = (req, res) => {
