@@ -1,4 +1,4 @@
-<% include('../header') %> 
+<%- include('../header') %> 
 <h1>Posts</h1>
 <ul>
     <% for (var i = 0; i <posts.length; i++) { %> 
@@ -6,12 +6,11 @@
         <a href="/posts/<%= i %>"><%= posts[i].title %> </a>
         <a href="/posts/<%= i %>/edit">[Edit]</a>
     </li>
-    <form action="/posts/<%= i %> " method="post">
+    <form action="/posts/<%= i %>?_method=DELETE" method="post">
         <input type="submit" value="del">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="_method" value="<%= i %> ">
+        <input type="hidden" value="<%= i %> ">
     </form>
     <% } %> 
 </ul>
 <p><a href="/posts/new">Add new</a></p>
-<% include('../fotter') %> 
+<%- include('../footer') %> 
